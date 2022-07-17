@@ -30,16 +30,16 @@
             <span class="text-light-blue w-50">
               {{ item.name }} One
             </span>
-              <div class="flex flex-row align-center custom-text-gray" @click="setItemActive(i, item.isActive)">
-                <span class="custom-text-gray mr-1">select all</span>
-                <button>
+              <div class="flex flex-row align-center custom-text-gray">
+                <span class="custom-text-gray mr-1" @click="selectAll(item.children)">select all</span>
+                <button @click="setItemActive(i, item.isActive)">
                   <img src="/icons/DownLine.png" height="7" width="12" alt="down-line">
                 </button>
               </div>
             </div>
             <ul>
               <div>
-                <li v-for="(child, i) in item.children" @click="currentChild = child.id" :class="{'text-black': currentChild === child.id}">
+                <li v-for="(child, i) in item.children" @click="removeChild(child)" :class="{'text-black': currentChildren.includes(child)}" :key="i">
                   Child Item
                 </li>
               </div>
@@ -52,7 +52,7 @@
             </span>
               <div class="flex flex-row align-center custom-text-gray" @click="setItemActive(i, item.isActive)">
                 <span class="custom-text-gray mr-1">select all</span>
-                <button>
+                <button @click="setItemActive(i, item.isActive)">
                   <img src="/icons/DownLine.png" height="7" width="12" alt="down-line">
                 </button>
               </div>
@@ -73,40 +73,25 @@ export default {
             name: 'Item',
             isActive: true,
             children: [
-              {
-                id: 1
-              },
-              {
-                id: 2
-              },
+              1,2
             ]
           },
           {
             name: 'Item',
             isActive: false,
             children: [
-              {
-                id: 3
-              },
-              {
-                id: 4
-              },
+              3,4
             ]
           },
           {
             name: 'Item',
             isActive: false,
             children: [
-              {
-                id: 5
-              },
-              {
-                id: 6
-              },
+              5,6
             ]
           }
         ],
-      currentChild: 1,
+      currentChildren: [],
       tabActive: 1,
     }
   },
@@ -118,6 +103,14 @@ export default {
       let array = this.items
       array[i].isActive = !boolean
       this.items = array
+    },
+    selectAll(children) {
+     this.currentChildren.push(...children)
+      console.log(this.currentChildren)
+    },
+    removeChild(child){
+      const id = this.currentChildren.indexOf(child)
+      this.currentChildren.splice(id,1)
     }
   }
 }

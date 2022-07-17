@@ -3,7 +3,7 @@
     <h1 class="mx-5">Standing Icons</h1>
     <div class="flex justify-center">
       <div v-for="e in data" >
-        <div class="standing-icon" :style="{'--accent-color': e.color}"><i :class="`fa-brands ` + e.iconName"></i></div>
+        <div class="standing-icon" :style="{'--accent-color': e.color}"><i :class="e.iconName"></i></div>
       </div>
     </div>
   </div>
@@ -16,19 +16,27 @@ export default {
       data: [
         {
           color: '#00C3C8',
-          iconName: 'fa-codepen'
+          iconName: 'fa-brands fa-codepen'
         },
         {
           color: '#03A5B3',
-          iconName: 'fa-html5'
+          iconName: 'fa-brands fa-html5'
         },
         {
           color: '#2091A4',
-          iconName: 'fa-css3'
+          iconName: 'fa-brands fa-css3'
         },
         {
           color: '#2F7499',
-          iconName: 'fa-js'
+          iconName: 'fa-brands fa-js'
+        },
+        {
+          color: '#cfce51',
+          iconName: 'fa-solid fa-banana'
+        },
+        {
+          color: '#cccb47',
+          iconName: 'fa-solid fa-pineapple'
         }
       ]
     }
