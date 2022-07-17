@@ -7,9 +7,9 @@
       <div class="background-transparent dropdown-tabs flex flex-row justify-between">
         <div class="flex flex-row">
           <div v-for="(item, i) in items">
-            <div class="tab flex flex-row align-center">
+            <div class="tab flex flex-row align-center" @click="setTabActive(i)">
               <img v-if="i === tabActive" src="/icons/MessageIcon.png" alt="MessageIcon">
-              <span class="text-gray-200" :class="{'text-black border-black': i === tabActive}" @click="setTabActive(i)">
+              <span class="text-gray-200" :class="{'text-black border-black': i === tabActive}">
             {{ item.name }}{{ i + 1 }}
           </span>
             </div>
