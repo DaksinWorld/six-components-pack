@@ -39,7 +39,7 @@
             </div>
             <ul>
               <div>
-                <li v-for="(child, i) in item.children" @click="removeChild(child)" :class="{'text-black': currentChildren.includes(child)}" :key="i">
+                <li v-for="(child, i) in item.children" @click="addChild(child)" :class="{'text-black': currentChildren.includes(child)}" :key="i">
                   Child Item
                 </li>
               </div>
@@ -108,9 +108,13 @@ export default {
      this.currentChildren.push(...children)
       console.log(this.currentChildren)
     },
-    removeChild(child){
+    addChild(child){
       const id = this.currentChildren.indexOf(child)
-      this.currentChildren.splice(id,1)
+      if(id === -1) {
+        this.currentChildren.push(child)
+      } else {
+        this.currentChildren.splice(id,1)
+      }
     }
   }
 }

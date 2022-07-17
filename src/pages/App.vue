@@ -7,7 +7,7 @@
         <!-- Iterating Buttons Data -->
         <div v-for="(text, i) in buttonData">
           <button
-            class="bg-slate-500 mx-1 my-5 hover:bg-slate-700 text-white font-regular py-2 px-4"
+            class="bg-slate-500 menu-btn mx-1 mt-5 hover:bg-slate-700 text-white font-regular py-2 px-4"
             :class="{'bg-yellow-500 hover:bg-yellow-700': pickedValue === text}"
             :key="i" @click="setPickedValue(text)"
           >
@@ -16,7 +16,7 @@
         </div>
       </div>
       <!-- File Input     -->
-      <div class="upload-data w-full h-100 bg-gray-300">
+      <div class="upload-data w-full h-100 bg-gray-300 mt-8px">
         <label class="flex justify-center" for="file">
           <div class="upload-data__file bg-gray-200 p-4">
             <div class="upload-border w-full h-100 rounded">
@@ -28,22 +28,39 @@
         <input class="d-none" id="file" type="file">
       </div>
       <!--  Uploaded Files    -->
-      <div class="uploaded-files w-full my-5">
-        <h2 class="bg-gray-200 py-5 px-3 my-5">Already uploaded files</h2>
-        <div class="my-5 w-full">
-          <div
-            class="uploaded-file"
-            v-for="(file, i) in files">
-            <span class="filesStyle bg-gray-200">{{file.name}}</span>
-            <span class="filesStyle bg-gray-200">{{file.rows}}</span>
-            <span class="filesStyle bg-gray-200">{{file.columns}}</span>
-            <span class="filesStyle bg-gray-200">{{file.date}}</span>
-            <span class="filesStyle bg-gray-200">{{file.authorName}}</span>
-            <button class="filesStyle btn bg-red-400 hover:bg-red-500 p-5 rounded">Delete</button>
-            <button class="filesStyle btn bg-blue-400 hover:bg-blue-500 p-5 rounded">Open</button>
-            <span class="filesStyle bg-gray-200 uploaded-file__dashbords">{{file.dashbords}} Dashbords</span>
-          </div>
-        </div>
+      <div class="uploaded-files w-full mt-8px">
+        <h2 class="bg-gray-200 py-5 px-3 mt-8px">Already uploaded files</h2>
+        <table class="mt-8px w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-200 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="py-3 px-6 border">File Name</th>
+              <th scope="col" class="py-3 px-6 border">Rows</th>
+              <th scope="col" class="py-3 px-6 border">Columns</th>
+              <th scope="col" class="py-3 px-6 border">Date</th>
+              <th scope="col" class="py-3 px-6 border">Author Name</th>
+              <th scope="col" class="py-3 px-6 border">Dashbords</th>
+              <th scope="col" class="py-3 px-6 border"></th>
+              <th scope="col" class="py-3 px-6 border"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="uploaded-file bg-white border-b bg-gray-200 dark:border-gray-200"
+              v-for="(file, i) in files"
+              >
+                <td class="py-4 px-6">{{file.name}}</td>
+                <td class="py-4 px-6">{{file.rows}}</td>
+                <td class="py-4 px-6">{{file.columns}}</td>
+                <td class="py-4 px-6">{{file.date}}</td>
+                <td class="py-4 px-6">{{file.authorName}}</td>
+                <td class="py-4 px-6">{{file.dashbords}}</td>
+                <td class="py-4 px-6 text-red-400 text-underline text-center hover:text-red-500">
+                  Delete
+                </td>
+                <td class="py-4 px-6 text-white text-center text-blue-400 hover:text-blue-500">Open</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <!-- Other Components   -->
@@ -150,11 +167,20 @@
   fill: #2E6BF2;
 }
 
+.menu-btn:first-child {
+  margin-left: 0;
+}
+
 </style>
 
 <!-- Scoped component css -->
 <!-- It only affect current component -->
 <style scoped>
+
+.mt-8px {
+  margin-top: 8px;
+}
+
 .upload-data__file {
   height: 400px;
   width: 50%;
