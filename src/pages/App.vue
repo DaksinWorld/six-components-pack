@@ -136,6 +136,20 @@
   .d-none {
     display: none;
   }
+
+.icon g, .icon path {
+  fill: black;
+}
+
+.icon {
+  padding: 2px;
+  fill: black;
+}
+
+.dropdown-first li:hover .icon path {
+  fill: #2E6BF2;
+}
+
 </style>
 
 <!-- Scoped component css -->

@@ -25,26 +25,24 @@
       </div>
       <div class="dropdown-items">
         <div v-for="(item, i) in items">
-          <div @click="setItemActive(i, item.isActive)" class="p-2 border-gray" v-if="item.isActive">
+          <div class="p-2 border-gray" v-if="item.isActive">
             <div class="flex flex-row justify-between align-center">
             <span class="text-light-blue w-50">
               {{ item.name }} One
             </span>
-              <div class="flex flex-row align-center custom-text-gray">
+              <div class="flex flex-row align-center custom-text-gray" @click="setItemActive(i, item.isActive)">
                 <span class="custom-text-gray mr-1">select all</span>
-                <img src="/icons/DownLine.png" height="7" width="12" alt="down-line">
+                <button>
+                  <img src="/icons/DownLine.png" height="7" width="12" alt="down-line">
+                </button>
               </div>
             </div>
             <ul>
-              <li>
-                Child Item
-              </li>
-              <li>
-                Child Item
-              </li>
-              <li>
-                Child Item
-              </li>
+              <div>
+                <li v-for="(child, i) in item.children" @click="currentChild = child.id" :class="{'text-black': currentChild === child.id}">
+                  Child Item
+                </li>
+              </div>
             </ul>
           </div>
           <div class="p-2 border-gray" v-else>
@@ -52,9 +50,11 @@
             <span class="custom-text-gray w-50">
               {{ item.name }} One
             </span>
-              <div class="flex flex-row align-center custom-text-gray">
-                <span @click="setItemActive(i)" class="custom-text-gray mr-1">select all</span>
-                <img src="/icons/DownLine.png" height="7" width="12" alt="down-line">
+              <div class="flex flex-row align-center custom-text-gray" @click="setItemActive(i, item.isActive)">
+                <span class="custom-text-gray mr-1">select all</span>
+                <button>
+                  <img src="/icons/DownLine.png" height="7" width="12" alt="down-line">
+                </button>
               </div>
             </div>
           </div>
@@ -71,17 +71,42 @@ export default {
       items: [
           {
             name: 'Item',
-            isActive: true
+            isActive: true,
+            children: [
+              {
+                id: 1
+              },
+              {
+                id: 2
+              },
+            ]
           },
           {
             name: 'Item',
-            isActive: false
+            isActive: false,
+            children: [
+              {
+                id: 3
+              },
+              {
+                id: 4
+              },
+            ]
           },
           {
             name: 'Item',
-            isActive: false
+            isActive: false,
+            children: [
+              {
+                id: 5
+              },
+              {
+                id: 6
+              },
+            ]
           }
         ],
+      currentChild: 1,
       tabActive: 1,
     }
   },
@@ -99,11 +124,12 @@ export default {
 </script>
 
 <style scoped>
+.text-black {
+  color: black !important;
+}
+
 .custom-shadow {
   box-shadow: 0px 149.794px 119.835px rgba(0, 0, 0, 0.07), 0px 62.5805px 50.0644px rgba(0, 0, 0, 0.0503198), 0px 4.14519px 3.31615px rgba(0, 0, 0, 0.0196802);
-
-
-
 
   max-width: 640px;
 }
