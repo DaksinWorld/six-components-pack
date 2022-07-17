@@ -1,0 +1,125 @@
+<template>
+  <div>
+    <h1>
+      First Dropdown
+    </h1>
+    <div class="custom-shadow dropdown mt-5">
+      <div class="background-transparent dropdown-tabs flex flex-row justify-between">
+        <div class="flex flex-row">
+          <div v-for="(item, i) in items">
+            <div class="tab flex flex-row align-center">
+              <img v-if="i === itemActive" src="/icons/MessageIcon.png" alt="MessageIcon">
+              <span class="text-gray-200" :class="{'text-black border-black': i === itemActive}" @click="setItemActive(i)">
+            {{ item }}{{ i + 1 }}
+          </span>
+            </div>
+          </div>
+        </div>
+        <img src="/icons/CloseLine.png" alt="CloseLine">
+      </div>
+      <div class="dropdown-search w-full">
+        <div class="dropdown-input flex flex-row border-gray border-radius-top-right">
+          <img class="p-3" src="/icons/SearchIcon.png" alt="SearchIcon">
+          <input class="p-3 w-full" type="text" placeholder="Search">
+        </div>
+      </div>
+      <div class="dropdown-items">
+        <div v-for="(item, i) in items">
+          <div class="p-2 border-gray" v-if="i === itemActive">
+            <div class="flex flex-row justify-between align-center">
+            <span class="text-light-blue w-50">
+              {{ item }} One
+            </span>
+              <div class="flex flex-row align-center custom-text-gray">
+                <span class="custom-text-gray mr-1">select all</span>
+                <img src="/icons/DownLine.png" height="7" width="12" alt="down-line">
+              </div>
+            </div>
+            <ul>
+              <li>
+                Child Item
+              </li>
+              <li>
+                Child Item
+              </li>
+              <li>
+                Child Item
+              </li>
+            </ul>
+          </div>
+          <div class="p-2 border-gray" v-else>
+            <div class="flex flex-row justify-between align-center">
+            <span class="custom-text-gray w-50">
+              {{ item }} One
+            </span>
+              <div class="flex flex-row align-center custom-text-gray">
+                <span @click="setItemActive(i)" class="custom-text-gray mr-1">select all</span>
+                <img src="/icons/DownLine.png" height="7" width="12" alt="down-line">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      items: ['Item', 'Item', 'Item'],
+      itemActive: 1,
+    }
+  },
+  methods: {
+    setItemActive(i) {
+      this.itemActive = i
+    }
+  }
+}
+</script>
+
+<style scoped>
+.custom-shadow {
+  box-shadow: 0px 149.794px 119.835px rgba(0, 0, 0, 0.07), 0px 62.5805px 50.0644px rgba(0, 0, 0, 0.0503198), 0px 4.14519px 3.31615px rgba(0, 0, 0, 0.0196802);
+
+
+
+
+  max-width: 640px;
+}
+
+.border-radius-top-right {
+  border-radius: 0 5px 0 0;
+}
+
+.custom-text-gray {
+  color: #EBECF2;
+}
+
+.text-light-blue {
+  color: #24BFCD;
+}
+
+.border-gray, .tab {
+  border-top: 1px solid #EBECF2;
+  border-right: 1px solid #EBECF2;
+  border-left: 1px solid #EBECF2;
+}
+
+ul li {
+  padding: 10px;
+  color: #EBECF2;
+}
+
+.tab {
+  background-color: #FDFDFF;
+  padding: 16px;
+  border-radius: 6px 6px 0 0;
+}
+
+img {
+  object-fit: contain;
+}
+</style>
