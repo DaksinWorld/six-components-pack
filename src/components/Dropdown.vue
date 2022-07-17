@@ -8,9 +8,9 @@
         <div class="flex flex-row">
           <div v-for="(item, i) in items">
             <div class="tab flex flex-row align-center">
-              <img v-if="i === itemActive" src="/icons/MessageIcon.png" alt="MessageIcon">
-              <span class="text-gray-200" :class="{'text-black border-black': i === itemActive}" @click="setItemActive(i)">
-            {{ item }}{{ i + 1 }}
+              <img v-if="i === tabActive" src="/icons/MessageIcon.png" alt="MessageIcon">
+              <span class="text-gray-200" :class="{'text-black border-black': i === tabActive}" @click="setTabActive(i)">
+            {{ item.name }}{{ i + 1 }}
           </span>
             </div>
           </div>
@@ -25,10 +25,10 @@
       </div>
       <div class="dropdown-items">
         <div v-for="(item, i) in items">
-          <div class="p-2 border-gray" v-if="i === itemActive">
+          <div @click="setItemActive(i, item.isActive)" class="p-2 border-gray" v-if="item.isActive">
             <div class="flex flex-row justify-between align-center">
             <span class="text-light-blue w-50">
-              {{ item }} One
+              {{ item.name }} One
             </span>
               <div class="flex flex-row align-center custom-text-gray">
                 <span class="custom-text-gray mr-1">select all</span>
@@ -50,7 +50,7 @@
           <div class="p-2 border-gray" v-else>
             <div class="flex flex-row justify-between align-center">
             <span class="custom-text-gray w-50">
-              {{ item }} One
+              {{ item.name }} One
             </span>
               <div class="flex flex-row align-center custom-text-gray">
                 <span @click="setItemActive(i)" class="custom-text-gray mr-1">select all</span>
@@ -68,13 +68,31 @@
 export default {
   data() {
     return {
-      items: ['Item', 'Item', 'Item'],
-      itemActive: 1,
+      items: [
+          {
+            name: 'Item',
+            isActive: true
+          },
+          {
+            name: 'Item',
+            isActive: false
+          },
+          {
+            name: 'Item',
+            isActive: false
+          }
+        ],
+      tabActive: 1,
     }
   },
   methods: {
-    setItemActive(i) {
-      this.itemActive = i
+    setTabActive(i) {
+      this.tabActive = i
+    },
+    setItemActive(i, boolean) {
+      let array = this.items
+      array[i].isActive = !boolean
+      this.items = array
     }
   }
 }

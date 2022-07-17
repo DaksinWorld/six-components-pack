@@ -3,7 +3,7 @@
     <h1>Comments</h1>
     <div class="comments p-2 border mt-5">
       <div v-for="(comment, i) in comments">
-        <div class="comment">
+        <div class="comment mt-30px">
           <div class="comment-userdata flex flex-row align-items-center">
             <div class="comment-image">
               <img :src="comment.image" width="50" height="50" alt="avatar">
@@ -74,6 +74,10 @@ export default {
 
 .comment-userdata {
   grid-area: userdata;
+}
+
+.mt-30px {
+  margin-top: 30px;
 }
 
 .more {

@@ -5,7 +5,7 @@
     </h1>
     <div class="card mt-5">
       <span class="card-title">EXPAND</span>
-      <label class="input-container mt-2">Product
+      <label class="input-container">Product
         <input type="radio" checked="checked" name="radio">
         <span class="checkmark"></span>
       </label>
@@ -27,7 +27,7 @@
       </label>
       <hr class="my-2">
       <span class="card-title">RELATED</span>
-      <label class="input-container mt-2">Reordered product
+      <label class="input-container">Reordered product
         <input type="radio" checked="checked" name="radio">
         <span class="checkmark"></span>
       </label>
@@ -62,14 +62,15 @@ li, .card-title {
     padding: 3px;
 }
 
+.mt-5px {
+  margin-top: 5px;
+}
+
 .card-title {
+  position: relative;
   padding: 5px 10px;
   font-weight: 400;
   color: #C6C2DE;
-}
-
-.input-container:first-child {
-  margin-top: 10px;
 }
 
 .input-container {
@@ -77,7 +78,6 @@ li, .card-title {
   border-radius: 4px;
   display: block;
   position: relative;
-  margin-bottom: 12px;
   cursor: pointer;
   font-size: 14px;
   -webkit-user-select: none;
