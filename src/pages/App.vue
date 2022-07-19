@@ -71,7 +71,9 @@
       <Variant2/>
       <SecondDropdown/>
       <Comment/>
+      <RichText/>
     </div>
+    <CollectionOverview/>
   </div>
 </template>
 
@@ -83,6 +85,8 @@
   import Dropdown from '../components/Dropdown'
   import Comment from '../components/Comment'
   import SecondDropdown from '../components/SecondDropdown'
+  import RichText from '../components/RichText'
+  import CollectionOverview from '../components/CollectionOverview'
 
   export default {
     components: {
@@ -93,6 +97,8 @@
       Variant2,
       SecondDropdown,
       Comment,
+      RichText,
+      CollectionOverview
     },
     data() {
       return {

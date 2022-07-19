@@ -9,7 +9,7 @@ module.exports = {
   html: {
     title: pkg.productName,
     description: pkg.description,
-    template: path.join(__dirname, 'index.ejs')
+    template: path.join(__dirname, 'index.ejs'),
   },
   postcss: {
     plugins: [
