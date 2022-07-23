@@ -32,6 +32,7 @@
       <tr
         class="uploaded-file bg-white border-b bg-gray-200 dark:border-gray-200"
         v-for="(e, i) in data"
+        :key="i"
       >
         <td class="py-4 px-6 text-black font-semibold">{{ e.name }}</td>
         <td class="py-4 px-6 text-black font-semibold">{{ e.collection_name }}</td>

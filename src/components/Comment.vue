@@ -2,7 +2,7 @@
   <div>
     <h1>Comments</h1>
     <div class="comments p-2 border mt-5">
-      <div v-for="(comment, i) in comments">
+      <div v-for="(comment, i) in comments" :key="i">
         <div class="comment mt-30px">
           <div class="comment-userdata flex flex-row align-items-center">
             <div class="comment-image">

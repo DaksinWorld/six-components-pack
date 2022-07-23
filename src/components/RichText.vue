@@ -12,7 +12,7 @@
         </div>
         <div ref="editor" :style="{background: color}" class="text-left">
         </div>
-        <button @click="Close" class="btn p-3 bg-gray-400 mt-3 text-white">Close</button>
+        <button @click="Close" class="btn p-3 bg-gray-400 text-center mt-3 text-white">Close</button>
       </div>
     </div>
     <div class="result p-3" v-if="content" v-html="content" :style="{background: color}">
@@ -24,17 +24,17 @@
 import "quill/dist/quill.bubble.css";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
-import undo_icon from "../icons/downicon.svg";
-import redo_icon from "../icons/downicon.svg";
 import Quill from "quill";
-import {customIcons} from '../constants/icons'
+import {customIcons, toolbarConfig} from '@/constants/richText-constants.js'
 
 export default {
   name: "App",
   components: {},
   data() {
-    let self = this;
     var icons = Quill.import("ui/icons");
+    var self = this
+
+    /* Implementing icons from richText-constants.js */
     icons["undo"] = customIcons["undo"];
     icons["redo"] = customIcons["redo"];
     icons["link"] = customIcons["link"]
@@ -49,46 +49,8 @@ export default {
 
     return {
       toolbar_settings: {
-        container: [
-          [
-            {
-              undo: undo_icon
-            },
-            {
-              redo: redo_icon
-            }
-          ],
-          [{'size': ['small', false, 'large', 'huge']}],
-          [{'align': []}],
-          [{
-            'color': [
-              '#212529',
-              '#845ef7',
-              '#1864AB',
-              '#339af0',
-              '#22b8cf',
-              '#51cf66',
-              '#fcc419',
-              '#ff6b6b',
-              '#f06595',
-              '#ced4da',
-              '#5f3dc4',
-              '#1864ab',
-              '#0b7285',
-              '#2b8a3e',
-              '#e67700',
-              '#c92a2a',
-              '#c2255c'
-            ]
-          },
-            {
-              'background': []
-            }],
-          ["bold", "italic", "underline", 'strike', 'code'],
-          [{'list': 'ordered'}, {'list': 'bullet'}],
-          ['link', 'image', 'code-block', 'blockquote'],
-          ["clean"]
-        ],
+        // init config
+        ...toolbarConfig,
         handlers: {
           redo() {
             self.editor.history.redo();
@@ -97,7 +59,6 @@ export default {
             self.editor.history.undo();
           }
         },
-        data: ''
       },
       content: '',
       isActive: false,
@@ -170,20 +131,6 @@ export default {
 .ql-size-huge {
   font-size: 2.5em;
 }
-
-/*.ql-picker-label svg{
-  width: 0px !important;
-}
-
-.ql-header,
-.ql-size .ql-picker-label:after {
-
-  color: black !important;
-  content: url("/downicon.svg");
-  position: absolute;
-  top: 1px !important;
-  right: 0;
-}*/
 
 .popup {
   position: fixed;

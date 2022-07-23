@@ -2,7 +2,7 @@
   <div>
     <h1 class="mx-5">Standing Icons</h1>
     <div class="flex justify-center flex-wrap">
-      <div v-for="e in data" >
+      <div v-for="(e, i) in data" :key="i">
         <div class="standing-icon" :style="{'--accent-color': e.color}"><i :class="e.iconName"></i></div>
       </div>
     </div>

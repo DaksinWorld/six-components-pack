@@ -6,11 +6,11 @@
     <div class="custom-shadow dropdown mt-5">
       <div class="background-transparent dropdown-tabs flex flex-row justify-between">
         <div class="flex flex-row">
-          <div v-for="(item, i) in items">
+          <div v-for="(item, i) in items" :key="i">
             <div class="tab flex flex-row align-center" @click="setTabActive(i)">
               <img v-if="i === tabActive" src="/icons/MessageIcon.png" alt="MessageIcon">
               <span class="text-gray-200" :class="{'text-black border-black': i === tabActive}">
-             {{ item.name }}{{ i + 1 }}
+              {{ item.name }}{{ i + 1 }}
           </span>
             </div>
           </div>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="dropdown-items">
-        <div v-for="(item, i) in items">
+        <div v-for="(item, i) in items" :key="i">
           <div class="p-2 border-gray" v-if="item.isActive">
             <div class="flex flex-row justify-between align-center">
             <span class="text-light-blue w-50">
@@ -39,7 +39,7 @@
             </div>
             <ul>
               <div>
-                <li v-for="(child, i) in items.children" @click="addChild(child.id)"
+                <li v-for="(child, i) in item.children" @click="addChild(child.id)"
                     :class="{'text-black': currentChildren.includes(child.id)}" :key="i">
                   {{ child.name }}
                 </li>
@@ -105,23 +105,27 @@ export default {
       this.tabActive = i
     },
     setItemActive(i, boolean) {
-      let array = this.items
+      let array = [...this.items]
       array[i].isActive = !boolean
       this.items = array
     },
     selectAll(children) {
-      children.forEach((e) => {
-        this.currentChildren.push(e.id)
-      })
+      const curr = this.currentChildren
 
-      console.log(this.currentChildren)
+      children.forEach((e) => {
+        if(!curr.includes(e.id)) {
+          curr.push(e.id)
+        }
+      })
     },
     addChild(child) {
-      const id = this.currentChildren.indexOf(child)
+      const curr = this.currentChildren
+
+      const id = curr.indexOf(child)
       if (id === -1) {
-        this.currentChildren.push(child)
+        curr.push(child)
       } else {
-        this.currentChildren.splice(id, 1)
+        curr.splice(id, 1)
       }
     },
   },
