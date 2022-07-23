@@ -10,7 +10,7 @@
             <div class="tab flex flex-row align-center" @click="setTabActive(i)">
               <img v-if="i === tabActive" src="/icons/MessageIcon.png" alt="MessageIcon">
               <span class="text-gray-200" :class="{'text-black border-black': i === tabActive}">
-            {{ item.name }}{{ i + 1 }}
+             {{ item.name }}{{ i + 1 }}
           </span>
             </div>
           </div>
@@ -20,7 +20,7 @@
       <div class="dropdown-search w-full">
         <div class="dropdown-input flex flex-row border-gray border-radius-top-right">
           <img class="p-3" src="/icons/SearchIcon.png" alt="SearchIcon">
-          <input class="p-3 w-full" type="text" placeholder="Search">
+          <input v-model="inputValue" class="p-3 w-full" type="text" placeholder="Search">
         </div>
       </div>
       <div class="dropdown-items">
@@ -39,8 +39,9 @@
             </div>
             <ul>
               <div>
-                <li v-for="(child, i) in item.children" @click="addChild(child)" :class="{'text-black': currentChildren.includes(child)}" :key="i">
-                  Child Item
+                <li v-for="(child, i) in items.children" @click="addChild(child.id)"
+                    :class="{'text-black': currentChildren.includes(child.id)}" :key="i">
+                  {{ child.name }}
                 </li>
               </div>
             </ul>
@@ -69,30 +70,34 @@ export default {
   data() {
     return {
       items: [
-          {
-            name: 'Item',
-            isActive: true,
-            children: [
-              1,2
-            ]
-          },
-          {
-            name: 'Item',
-            isActive: false,
-            children: [
-              3,4
-            ]
-          },
-          {
-            name: 'Item',
-            isActive: false,
-            children: [
-              5,6
-            ]
-          }
-        ],
+        {
+          name: 'Item',
+          isActive: true,
+          children: [
+            {name: 'Apple', id: 1},
+            {name: 'Banana', id: 2},
+          ]
+        },
+        {
+          name: 'Item',
+          isActive: false,
+          children: [
+            {name: 'Apple', id: 3},
+            {name: 'Banana', id: 4},
+          ]
+        },
+        {
+          name: 'Item',
+          isActive: false,
+          children: [
+            {name: 'Apple', id: 5},
+            {name: 'Banana', id: 6},
+          ]
+        }
+      ],
       currentChildren: [],
       tabActive: 1,
+      inputValue: ''
     }
   },
   methods: {
@@ -105,18 +110,21 @@ export default {
       this.items = array
     },
     selectAll(children) {
-     this.currentChildren.push(...children)
+      children.forEach((e) => {
+        this.currentChildren.push(e.id)
+      })
+
       console.log(this.currentChildren)
     },
-    addChild(child){
+    addChild(child) {
       const id = this.currentChildren.indexOf(child)
-      if(id === -1) {
+      if (id === -1) {
         this.currentChildren.push(child)
       } else {
-        this.currentChildren.splice(id,1)
+        this.currentChildren.splice(id, 1)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

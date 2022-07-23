@@ -43,7 +43,7 @@
           </button>
         </td>
         <td class="py-4 px-6">
-          <button class="btn-delete">
+          <button class="btn-delete" @click="deleteRow(i)">
             <img width="20" src="/icons/DeleteIcon.svg" alt="DeleteIcon">
           </button>
         </td>
@@ -185,6 +185,10 @@ export default {
     },
     setModal() {
       this.isModalActive = !this.isModalActive
+    },
+    deleteRow(i) {
+      const newArr = () => this.data.splice(i, 1)
+      newArr()
     }
   },
   computed: {
@@ -221,6 +225,10 @@ export default {
 .btn-delete {
   background: #BE123C;
   box-shadow: 0.746032px 0.746032px 1.49206px rgba(0, 0, 0, 0.45), 0px 0px 0.746032px rgba(0, 0, 0, 0.45);
+}
+
+.uploaded-file {
+  transition: all .1s linear;
 }
 
 .modal {
@@ -265,5 +273,6 @@ export default {
   border: 1px solid black;
   border-radius: 7px;
 }
+
 
 </style>
