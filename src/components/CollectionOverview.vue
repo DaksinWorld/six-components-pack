@@ -198,6 +198,10 @@ export default {
         return e.name.toLowerCase().includes(this.filterValue.toLowerCase())
       })
     }
+  },
+  async mounted() {
+    const collections = await this.$store.dispatch('getCollections')
+    this.collections = collections
   }
 }
 </script>
